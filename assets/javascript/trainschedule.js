@@ -18,7 +18,7 @@ $("#addTrainBtn").on("click", function(event) {
     // Grabs administrator input
     var trainName = $("#trainNameInput").val().trim();
     var trainDest = $("#trainDestinationInput").val().trim();
-    var firstTrain = moment($("#firstTrainInput").val().trim(), "MM/DD/YYYY").format("X");
+    var firstTrain = moment($("#firstTrainInput").val().trim(), "HH/mm").format("X");
     var trainFreq = $("#TrainFrequencyInput").val().trim();
   
     // Creates local "temporary" object for holding new train data
@@ -33,7 +33,7 @@ $("#addTrainBtn").on("click", function(event) {
     database.ref().push(newTrain);
   
     // Logs everything to console
-    console.log(newTrain.Name);
+    console.log(newTrain.name);
     console.log(newTrain.destination);
     console.log(newTrain.startingTrain);
     console.log(newTrain.frequency);
@@ -51,29 +51,22 @@ $("#addTrainBtn").on("click", function(event) {
   database.ref().on("child_added", function(childSnapshot) {
     console.log(childSnapshot.val());
   
-    // Store everything into a variable.
+    // Store everything into a variable
     var trainName = childSnapshot.val().name;
-    var trainDest = childSnapshot.val().role;
-    var firstTrain = childSnapshot.val().start;
-    var trainFreq = childSnapshot.val().rate;
+    var trainDest = childSnapshot.val().destination;
+    var firstTrain = childSnapshot.val().startingTrain;
+    var trainFreq = childSnapshot.val().frequency;
   
     // train Info
     console.log(trainName);
     console.log(trainDest);
     console.log(firstTrain);
     console.log(trainFreq);
-  
-    // Prettify the employee start
-   // var empStartPretty = moment.unix(empStart).format("MM/DD/YYYY");
-  
-    // Calculate the months worked using hardcore math
-    // To calculate the months worked
-   // var empMonths = moment().diff(moment(empStart, "X"), "months");
-   // console.log(empMonths);
-  
-    // Calculate the total billed rate
-    //var empBilled = empMonths * empRate;
-   // console.log(empBilled);
+     
+
+//    * Code this app to calculate when the next train will arrive; this should be relative to the current time. 
+//  * Users from many different machines must be able to view same train times.
+//  * Styling and theme are completely up to you. Get Creative!
   
     // Create the new row
     var newRow = $("<tr>").append(
